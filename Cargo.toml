@@ -1,5 +1,5 @@
 [package]
-name = "arms"
+name = "arms-core"
 version = "0.1.0"
 edition = "2021"
 authors = ["Automate Capture LLC <research@automate-capture.com>"]
