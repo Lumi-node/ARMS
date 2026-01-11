@@ -1,0 +1,39 @@
+[package]
+name = "arms"
+version = "0.1.0"
+edition = "2021"
+authors = ["Automate Capture LLC <research@automate-capture.com>"]
+description = "ARMS: Attention Reasoning Memory Store - A spatial memory fabric for AI. Position IS relationship."
+license = "MIT"
+repository = "https://github.com/automate-capture/arms"
+homepage = "https://research.automate-capture.com/arms"
+documentation = "https://docs.rs/arms"
+readme = "README.md"
+keywords = ["memory", "spatial-database", "ai", "embeddings", "vector-search"]
+categories = ["database", "science", "algorithms"]
+exclude = [
+    "target/",
+    ".venv/",
+    ".git/",
+    ".claude/",
+    "paper/",
+    "images/",
+    ".env",
+]
+
+[lib]
+name = "arms"
+path = "src/lib.rs"
+
+[dependencies]
+thiserror = "1.0"
+
+[dev-dependencies]
+criterion = "0.5"
+
+[features]
+default = []
+
+[profile.release]
+lto = true
+codegen-units = 1
