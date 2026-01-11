@@ -1,12 +1,23 @@
 # ARMS - Attention Reasoning Memory Store
 
-> "The hippocampus of artificial minds"
+> **Position IS Relationship** - A Spatial Memory Fabric for AI Systems
 
-ARMS is a spatial memory fabric for AI systems. It stores computed attention states at their native dimensional coordinates, enabling instant retrieval by proximity rather than traditional indexing.
+ARMS is a spatial memory fabric that enables AI systems to store and retrieve computed states by their native dimensional coordinates. Unlike traditional databases that require explicit relationships through foreign keys or learned topology through approximate nearest neighbor algorithms, ARMS operates on a fundamental principle: **proximity defines connection**.
 
-## Core Philosophy
+![ARMS Architecture](paper/figures/fig01_architecture.jpg)
 
-**Position IS relationship** - No foreign keys, proximity defines connection.
+## The Problem
+
+Current AI memory approaches all lose information:
+
+- **Extended context**: Expensive, doesn't scale beyond training length
+- **RAG retrieval**: Retrieves text, requires recomputation of attention
+- **Vector databases**: Treat all data as unstructured point clouds
+- **External memory**: Key-value stores with explicit indexing
+
+![Traditional vs ARMS](paper/figures/fig06_traditional_vs_arms.jpg)
+
+## The ARMS Insight
 
 ```
 Traditional:  State → Project → Index → Retrieve → Reconstruct
@@ -20,6 +31,8 @@ ARMS:         State → Store AT coordinates → Retrieve → Inject directly
 
 Everything in ARMS reduces to five operations:
 
+![Five Primitives](paper/figures/fig03_primitives.jpg)
+
 | Primitive | Type | Purpose |
 |-----------|------|---------|
 | **Point** | `Vec<f32>` | Any dimensionality |
@@ -31,7 +44,7 @@ Everything in ARMS reduces to five operations:
 ## Quick Start
 
 ```rust
-use arms::{Arms, ArmsConfig, Point};
+use arms_core::{Arms, ArmsConfig, Point};
 
 // Create ARMS with default config
 let mut arms = Arms::new(ArmsConfig::new(768));
@@ -45,28 +58,59 @@ let query = Point::new(vec![0.1; 768]);
 let neighbors = arms.near(&query, 5).unwrap();
 ```
 
-## Architecture
+## Hexagonal Architecture
+
+ARMS follows a hexagonal (ports-and-adapters) architecture. The core domain contains pure math with no I/O. Ports define trait contracts. Adapters provide swappable implementations.
+
+![Hexagonal Architecture](paper/figures/fig02_hexagonal.jpg)
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                         ARMS                                 │
+│                         ARMS                                │
 ├─────────────────────────────────────────────────────────────┤
-│                                                              │
 │  CORE (pure math, no I/O)                                   │
 │    Point, Id, Blob, Proximity, Merge                        │
-│                                                              │
-│  PORTS (trait contracts)                                     │
+│                                                             │
+│  PORTS (trait contracts)                                    │
 │    Place, Near, Latency                                     │
-│                                                              │
+│                                                             │
 │  ADAPTERS (swappable implementations)                       │
-│    Storage: Memory, NVMe (coming)                           │
+│    Storage: Memory, NVMe (planned)                          │
 │    Index: Flat, HAT (see arms-hat crate)                    │
-│                                                              │
-│  ENGINE (orchestration)                                      │
+│                                                             │
+│  ENGINE (orchestration)                                     │
 │    Arms - the main entry point                              │
-│                                                              │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+## The Hippocampus Analogy
+
+ARMS functions as an artificial hippocampus for AI systems:
+
+![Hippocampus Analogy](paper/figures/fig05_hippocampus.jpg)
+
+| Hippocampus | ARMS |
+|-------------|------|
+| Encodes episodic memories | Stores attention states |
+| Spatial navigation | High-dimensional proximity |
+| Pattern completion | Near queries |
+| Memory consolidation | Merge operations |
+| Place cells | Points at coordinates |
+
+## Ecosystem
+
+![ARMS Ecosystem](paper/figures/fig07_ecosystem.jpg)
+
+### Related Crates
+
+- [`arms-hat`](https://crates.io/crates/arms-hat) - Hierarchical Attention Tree index adapter (100% recall, 70x faster than HNSW)
+
+### Planned Adapters
+
+- `arms-nvme` - Persistent storage via memory-mapped files
+- `arms-distributed` - Sharded storage across machines
+- `arms-gpu` - CUDA-accelerated similarity search
+- `arms-py` - Python bindings
 
 ## Proximity Functions
 
@@ -77,16 +121,19 @@ Built-in proximity measures:
 - **DotProduct** - Raw dot product
 - **Manhattan** - L1 distance
 
-## Related Crates
-
-- [`arms-hat`](https://crates.io/crates/arms-hat) - Hierarchical Attention Tree index adapter for ARMS
-
 ## Installation
 
 ```toml
 [dependencies]
-arms = "0.1"
+arms-core = "0.1"
 ```
+
+## Paper
+
+The research paper is available in the [`paper/`](paper/) directory.
+
+**ARMS: A Spatial Memory Fabric for AI Systems**
+Andrew Young, 2026
 
 ## License
 
@@ -97,9 +144,10 @@ MIT License - see [LICENSE](LICENSE)
 If you use ARMS in research, please cite:
 
 ```bibtex
-@software{arms2026,
+@article{young2026arms,
   author = {Young, Andrew},
-  title = {ARMS: Attention Reasoning Memory Store},
+  title = {ARMS: A Spatial Memory Fabric for AI Systems},
+  journal = {arXiv preprint},
   year = {2026},
   url = {https://github.com/automate-capture/arms}
 }
