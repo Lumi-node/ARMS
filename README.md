@@ -1,3 +1,16 @@
+---
+license: mit
+tags:
+  - spatial-database
+  - memory
+  - embeddings
+  - ai
+  - vector-search
+  - rust
+library_name: arms-core
+pipeline_tag: feature-extraction
+---
+
 # ARMS - Attention Reasoning Memory Store
 
 > **Position IS Relationship** - A Spatial Memory Fabric for AI Systems
