@@ -12,7 +12,7 @@ pipeline_tag: feature-extraction
 ---
 
 # ARMS - Attention Reasoning Memory Store
-[![DOI](https://zenodo.org/badge/1132385062.svg)](https://doi.org/10.5281/zenodo.18263613)
+[![DOI](https://zenodo.org/badge/1132385062.svg)](https://doi.org/10.5281/zenodo.18263613) [![crates.io](https://img.shields.io/crates/v/arms-core.svg)](https://crates.io/crates/arms-core) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Rust](https://img.shields.io/badge/Rust-1.70+-orange.svg)](https://www.rust-lang.org/)
 > **Position IS Relationship** - A Spatial Memory Fabric for AI Systems
 
 ARMS is a spatial memory fabric that enables AI systems to store and retrieve computed states by their native dimensional coordinates. Unlike traditional databases that require explicit relationships through foreign keys or learned topology through approximate nearest neighbor algorithms, ARMS operates on a fundamental principle: **proximity defines connection**.
