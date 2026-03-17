@@ -15,6 +15,10 @@ pipeline_tag: feature-extraction
 [![DOI](https://zenodo.org/badge/1132385062.svg)](https://doi.org/10.5281/zenodo.18263613) [![crates.io](https://img.shields.io/crates/v/arms-core.svg)](https://crates.io/crates/arms-core) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Rust](https://img.shields.io/badge/Rust-1.70+-orange.svg)](https://www.rust-lang.org/)
 > **Position IS Relationship** - A Spatial Memory Fabric for AI Systems
 
+> **Status: Early-Stage Research Prototype**
+>
+> ARMS is an active research project exploring spatial memory for AI systems. The architecture and primitives described below are implemented and functional, but have been validated only on **small-scale synthetic benchmarks** (GPT-2, <100 stored states). This is not production-ready software. Rigorous evaluation across diverse models, datasets, and real-world workloads is ongoing. Contributions and critical feedback welcome.
+
 ARMS is a spatial memory fabric that enables AI systems to store and retrieve computed states by their native dimensional coordinates. Unlike traditional databases that require explicit relationships through foreign keys or learned topology through approximate nearest neighbor algorithms, ARMS operates on a fundamental principle: **proximity defines connection**.
 
 ![ARMS Architecture](paper/figures/fig01_architecture.jpg)
@@ -116,7 +120,7 @@ ARMS functions as an artificial hippocampus for AI systems:
 
 ### Related Crates
 
-- [`arms-hat`](https://crates.io/crates/arms-hat) - Hierarchical Attention Tree index adapter (100% recall, 70x faster than HNSW)
+- [`arms-hat`](https://crates.io/crates/arms-hat) - Hierarchical Attention Tree index adapter (experimental — see [HAT repo](https://github.com/Lumi-node/hat) for benchmark details and limitations)
 
 ### Planned Adapters
 
